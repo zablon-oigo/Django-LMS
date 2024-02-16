@@ -15,7 +15,7 @@ Log-in
 </p>
 {% endif %}
 <div class="">
-    <form action="{% ur 'login' %}" class="">
+    <form action="{% url 'login' %}" class="">
         {{form.as_p }}
         {% csrf_token %}
         <input type="hidden" name="'next" value="{{ next }}">
