@@ -44,7 +44,7 @@ class CourseDeleteView(OwnerCourseMixin, DeleteView):
     permission_required='course.view_course'
 
 class CourseModuleUpdateView(TemplateResponseMixin, View):
-    template_name='course/formset.html'
+    template_name='course/module/formset.html'
     course=None
 
     def get_formset(self, data=None):
