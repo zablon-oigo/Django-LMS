@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Module {{module.order|add:1}}: {{module.title}}
+{% endblock %}
+
+{% block content %}
+
+{% with course=module.course %}
+
+<h1> Course "{{course.title}}"</h1>
+<div class="">
+    <h3>Modules</h3>
+    <ul>
+        {% for m in course.modules.all %}
+        <li class="" data-id="{{m.id}}" {% if m == module %}>
+            <a href="{% url 'module_content_list' m.id %}" class="">
+                <span>
+                    Module <span> {{ m.order|add:1 }}</span>
+                </span>
+                <br>
+                {{m.title}}
+            </a>
+        </li>
+        {% empty %}
+        <li>
+            No modules yet.
+        </li>
+        {% endfor %}
+    </ul>
+    <p>
+        <a href="{% url 'course_module_update' course.id %}">
+            edit modules
+        </a>
+    </p>
+</div>
+<div class="">
+    <h2>Module {{module.order|add:1}}: {{module.title}}</h2>
+    <h3>
+        Module contents:
+    </h3>
+    <div class="">
+        {% for content in module.contents.all %}
+        <div class="" data-id="{{content.id}}">
+            {% with item=cntent.item %}
+            <p>{{item}}</p>
+            <a href="#">Edit</a>
+            <form action="{% url 'module_content_delete' content.id %}" method="post">
+                <input type="submit" value="Delete">
+                {% csrf_token %}
+            </form>
+            {% endwith %}
+        </div>
+        {% empty %}
+        <p>
+            This module has no contents yet.
+        </p>
+        {% endfor %}
+    </div>
+    <h3>Add new content : </h3>
+    <ul>
+        <li><a href="{% url 'module_content_create' module.id 'text' %}" class="">
+            Text
+        </a></li>
+        <li>
+            <a href="{% url 'module_content_create' module.id 'video' %}" class="">
+                Image
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'module_content_create' module.id 'file' %}" class="">
+                File
+            </a>
+        </li>
+    </ul>
+</div>
+{% endwith %}
+
+{% endblock %}
