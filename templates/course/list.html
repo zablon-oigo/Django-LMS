@@ -1,4 +1,4 @@
-{% extends 'base.content' %}
+{% extends 'base.html' %}
 
 {% block title %}
 My Courses
@@ -14,7 +14,7 @@ My Courses
         {{course.title}}
     </h3>
     <div class="">
-        <a href="{% 'course_edit course.id %}">
+        <a href="{% url 'course_edit' course.id %}">
             edit
         </a>
         <a href="{% url 'course_delete' course.id %}">delete</a>
