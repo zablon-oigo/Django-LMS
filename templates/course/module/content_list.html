@@ -93,5 +93,12 @@ const moduleOrderUrl = '{% url "module_order" %}';
 sortable ('#modules', {
     forcePlaceholderSize : true,
     placeholderClass: 'placeholder'
+})[0].addEventListener('sortupdate', function(e){
+    moduleOrder={};
+    var modules = documetn.querySelectorAll('#modules li');
+    modulesOrder[module.dataset.id] = index;
+    module.querySelector('.order').innerHTML = index + 1
+    options['body'] = JSON.stringify(moduleOrder)
+    fetch(moduleOrderUrl, options)
 })
 {% endblock %}
