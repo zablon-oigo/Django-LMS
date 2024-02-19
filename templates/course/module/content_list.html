@@ -78,27 +78,29 @@ Module {{module.order|add:1}}: {{module.title}}
 
 {% endblock %}
 {% block include_js %}
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html5sortable/0.13.3/
-html5sortable.min.js">
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5sortable/0.13.3/html5sortable.min.js"></script>
 {% endblock %}
 
 {% block domready %}
-let options = {
-    method: 'POST'
-    mode: 'same-origin'
-}
-const moduleOrderUrl = '{% url "module_order" %}';
+<script>
+    let options = {
+        method: 'POST',
+        mode: 'same-origin'
+    }
+    const moduleOrderUrl = '{% url "content_order" %}';
 
-sortable ('#modules', {
-    forcePlaceholderSize : true,
-    placeholderClass: 'placeholder'
-})[0].addEventListener('sortupdate', function(e){
-    moduleOrder={};
-    var modules = documetn.querySelectorAll('#modules li');
-    modulesOrder[module.dataset.id] = index;
-    module.querySelector('.order').innerHTML = index + 1
-    options['body'] = JSON.stringify(moduleOrder)
-    fetch(moduleOrderUrl, options)
-})
+    sortable('#modules', {
+        forcePlaceholderSize: true,
+        placeholderClass: 'placeholder'
+    })[0].addEventListener('sortupdate', function (e) {
+        let moduleOrder = {};
+        let modules = document.querySelectorAll('#modules li');
+        modules.forEach(function (module, index) {
+            moduleOrder[module.dataset.id] = index;
+            module.querySelector('.order').innerHTML = index + 1;
+        });
+        options['body'] = JSON.stringify(moduleOrder);
+        fetch(moduleOrderUrl, options);
+    });
+</script>
 {% endblock %}
