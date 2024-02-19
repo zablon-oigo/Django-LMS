@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from .fields import OrderField
-
+from django.utils.text import slugify
 
 class Subject(models.Model):
     title=models.CharField(max_length=200)
@@ -45,6 +45,10 @@ class Module(models.Model):
 
     def __str__(self):
         return f'{self.order}.{self.title}'
+    
+    def save(self, *args, **kwargs):
+        super().save(self, *args, **kwargs)
+        self.slug=slugify(self.title)
 
 
 
