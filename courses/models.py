@@ -15,6 +15,10 @@ class Subject(models.Model):
     def __str__(self):
         return self.title
     
+    def save(self, *args, **kwargs):
+        super().save(self, *args, **kwargs)
+        self.slug=slugify(self.title)
+
 
 
 class Course(models.Model):
@@ -30,6 +34,11 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    
+        
+    def save(self, *args, **kwargs):
+        super().save(self, *args, **kwargs)
+        self.slug=slugify(self.title)
     
 
 
