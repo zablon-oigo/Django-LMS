@@ -4,7 +4,9 @@ from .views import ManageCourseListView,CourseCreateView,CourseUpdateView\
     ,ModuleContentListView,ContentView,ModuleOrderView,CourseListView,CourseDetailView
 
 urlpatterns=[
-         path('',CourseListView.as_view, name='course_list'),
+         path('',CourseListView.as_view(), name='course_list'),
+         path('subject/<slug:subject>/',CourseListView.as_view(),name='course_list_subject'),
+         path('<slug:slug>/',CourseDetailView.as_view(), name='course_detail'),
          path('mine/',ManageCourseListView.as_view(), name='manage_course_list'),
          path('create/',CourseCreateView.as_view(), name='course_create'),
          path('<pk>/edit/',CourseUpdateView.as_view(), name='course_edit'),
