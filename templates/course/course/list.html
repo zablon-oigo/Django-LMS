@@ -46,7 +46,7 @@ All courses
     {% for course in courses %}
     {% with subject=course.subject %}
     <h3>
-        <a href="{% url 'course_detail' course.slug %}" class="">
+        <a href="{% url 'course_detail' course.id %}" class="">
             {{course.title}}
         </a>
     </h3>
