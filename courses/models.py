@@ -106,6 +106,6 @@ class Video(ItemBase):
 
 
 def render(self):
-    return render_to_string(f'courses/content/{self._meta.model_name}.html', {'item':self})
+    return render_to_string(f'content/{self._meta.model_name}.html', {'item':self})
 
 
