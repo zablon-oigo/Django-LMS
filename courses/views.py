@@ -12,7 +12,7 @@ from .forms import ModuleFormSet
 from braces.views import CsrfExemptMixin, JSONRequestResponseMixin
 from django.views.generic.detail import DetailView
 from students.forms import CourseEnrollForm
-
+from django.core.cache import cache
 class OwnerMixin:
     def get_queryset(self):
         qs=super().get_queryset()
@@ -177,9 +177,13 @@ class CourseListView(TemplateResponseMixin, View):
     template_name= 'course/course/list.html'
 
     def get(self, request, subject=None):
-        subjects = Subject.objects.annotate(
-            total_courses=Count('courses')
-        )
+        subjects=cache.get('all_subjects')
+        if not subjects:
+
+            subjects = Subject.objects.annotate(
+                total_courses=Count('courses')
+            )
+            cache.set('all_subjects', subjects)
         courses=Course.objects.annotate(
             total_modules=Count('modules')
 
