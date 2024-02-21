@@ -44,13 +44,16 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
     'embed_video',
     'debug_toolbar',
+    'redisboard',
 ]
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware'
     'django.middleware.common.CommonMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -90,10 +93,14 @@ DATABASES = {
 
 CACHES={
     'default':{
-        'BACKEND':'django.core.cache.backends.memchahed.PyMemchedCache',
-        'LOCATION':'127.0.0.1:11211'
+        'BACKEND':'django.core.cache.backends.redis.RedisCache',
+        'LOCATION':'redis://127.0.0.0:6379',
     }
 }
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 60 * 15 
+CACHE_MIDDLEWARE_KEY_PREFIX ='django_project'
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
