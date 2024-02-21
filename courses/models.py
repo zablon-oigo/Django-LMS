@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from .fields import OrderField
 from django.utils.text import slugify
-
+from django.template.loader import render_to_string
 class Subject(models.Model):
     title=models.CharField(max_length=200)
     slug=models.SlugField(max_length=200, unique=True)
@@ -103,5 +103,9 @@ class Image(ItemBase):
 
 class Video(ItemBase):
     url=models.URLField()
+
+
+def render(self):
+    return render_to_string(f'courses/content/{self._meta.model_name}.html', {'item':self})
 
 
