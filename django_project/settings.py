@@ -45,8 +45,13 @@ INSTALLED_APPS = [
     'embed_video',
     'debug_toolbar',
     'redisboard',
+    'rest_framework'
 ]
-
+REST_FRAMEWORK={
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadonly'
+    ]
+}
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
