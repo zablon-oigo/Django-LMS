@@ -108,7 +108,14 @@ CACHES={
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 15 
 CACHE_MIDDLEWARE_KEY_PREFIX ='django_project'
-
+CHANNEL_LAYERS={
+    'default':{
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        'CONFIG':{
+            'hosts':['127.0.0.1',6379],
+        }
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
