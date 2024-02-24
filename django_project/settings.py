@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'redisboard',
     'rest_framework',
+    'channels'
 ]
 REST_FRAMEWORK={
     'DEFAULT_PERMISSION_CLASSES':[
@@ -86,6 +87,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_project.wsgi.application'
 
+ASGI_APPLICATION='django_project.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
