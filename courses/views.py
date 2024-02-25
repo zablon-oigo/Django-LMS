@@ -125,8 +125,8 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
             obj.save()
 
             if not id:
-                Content.objects.create(module=self.module,itme=obj)
-                return redirect('nodule_cont_list',self.module.id)
+                Content.objects.create(module=self.module,item=obj)
+                return redirect('module_content_list',self.module.id)
             
             return self.render_to_response({'form':form,'object':self.obj})
         
