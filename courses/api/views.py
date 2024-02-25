@@ -22,7 +22,7 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     )
     def contents(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
-    @action(detail=True, methods=['post'], authenticatication_classes=[IsAuthenticated])
+    @action(detail=True, methods=['post'], authentication_classes=[IsAuthenticated])
 
     def enroll(self, request, *args, **kwargs):
         course=self.get_object()
