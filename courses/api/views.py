@@ -14,7 +14,7 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     queryset=Course.objects.all()
     serializer_class=CourseSerializer
     @action(
-            default=True,
+            detail=True,
             methods=['get'],
             serializer_class=CourseWithContentsSerializer,
             authentication_classes=[BasicAuthentication],
