@@ -1,12 +1,12 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import async_to_sync
-from django.utils import timezone
+from django.utils.timezone import datetime
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.user=self.scope['user']
         self.id=self.scope['url_route']['kwargs']['course_id']
-        self.room_group_name=f'chat_%s'% self.id
+        self.room_group_name=f'chat_%s' % self.id
         await self.channel_layer.group_add(
                         self.room_group_name,
                         self.channel_name
@@ -30,7 +30,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'type':'chat_message',
                 'message':message,
                 'user':self.user.username,
-                'datetitme':now.isoformat(),
+                'datetime':datetime.now.isoformat(),
             }
         )
 
