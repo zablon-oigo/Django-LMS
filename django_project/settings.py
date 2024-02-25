@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'courses.apps.CoursesConfig',
     'students.apps.StudentsConfig',
+    'chat.apps.ChatConfig',
     'embed_video',
     'debug_toolbar',
     'redisboard',
     'rest_framework',
+    'channels'
 ]
 REST_FRAMEWORK={
     'DEFAULT_PERMISSION_CLASSES':[
@@ -85,6 +87,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_project.wsgi.application'
 
+ASGI_APPLICATION='django_project.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -105,7 +108,14 @@ CACHES={
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 15 
 CACHE_MIDDLEWARE_KEY_PREFIX ='django_project'
-
+CHANNEL_LAYERS={
+    'default':{
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        'CONFIG':{
+            'hosts':['127.0.0.1',6379],
+        }
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
