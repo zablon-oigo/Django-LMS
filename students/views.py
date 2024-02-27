@@ -53,7 +53,7 @@ class StudentCourseListView(LoginRequiredMixin,ListView):
 
 class StudentCourseDetailView(DetailView):
     model=Course
-    template_name='students/detail.html'
+    template_name='student/detail.html'
 
     def get_queryset(self):
         qs=super().get_queryset()
