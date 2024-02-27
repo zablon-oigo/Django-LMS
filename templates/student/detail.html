@@ -15,7 +15,7 @@
     <ul>
         {% for m in object.modules.all %}
         <li data-id="{{m.id}}">
-            <a href="{% url 'student_course_detail_module' %} object.id m.id">
+            <a href="{% url 'student_course_detail_module' object.id m.id  %} ">
                 <span>
                     Module <span class="">{{m.order|add:1}}</span>
                 </span>
