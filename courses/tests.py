@@ -18,3 +18,10 @@ class CourseTests(TestCase):
             slug="chapter-one",
             overview="description",
         )
+
+    def test_model_content(self):
+        self.assertEqual(self.course.owner.username, "testuser")
+        self.assertEqual(self.course.subject, "New subject")
+        self.assertEqual(self.course.slug, "chapter-one")
+        self.assertEqual(self.course.overview, "description")
+
