@@ -25,3 +25,19 @@ class CourseTests(TestCase):
         self.assertEqual(self.course.slug, "chapter-one")
         self.assertEqual(self.course.overview, "description")
 
+    def test_course_create_view(self):
+        response=self.client.post(reverse("course_create"),
+                                  {
+            "owner":self.user.id,
+            "subject":"another subject",
+            "title":"chapter two",
+            "slug":"chapter-two",
+            "overview":"description",
+
+        },)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Course.objects.last().subject, "another subject")
+        self.assertEqual(Course.objects.last().title, "chapter two")
+        self.assertEqual(Course.objects.last().slug, "chpater-two")
+        self.assertEqual(Course.objects.last().overview,"description")
+
