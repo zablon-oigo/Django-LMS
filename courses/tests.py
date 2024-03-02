@@ -41,3 +41,12 @@ class CourseTests(TestCase):
         self.assertEqual(Course.objects.last().slug, "chpater-two")
         self.assertEqual(Course.objects.last().overview,"description")
 
+    def test_course_update_view(self):
+        response=self.client.post(reverse("course_edit", args="1"),{
+            "title":"updated title",
+            "overview":"updated description",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Course.objects.last().title, "updated title")
+        self.assertEqual(Course.objects.last().overview, "updated description")
+        
