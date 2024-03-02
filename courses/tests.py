@@ -49,4 +49,8 @@ class CourseTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Course.objects.last().title, "updated title")
         self.assertEqual(Course.objects.last().overview, "updated description")
-        
+
+    
+    def test_course_delete_view(self):
+        response=self.client.post(reverse("course_delete", args="1"))
+        self.assertEqual(response.status_code, 302)
